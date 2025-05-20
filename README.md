@@ -5,12 +5,11 @@ The underlying technology is currently under patent application.
 Commercial use is prohibited without a separate license agreement.  
 E-mail: akihiro.ezoe at riken.jp
 
-
-Takes test_dataset.txt as input
-Runs each program in sequence
-
+For parallel arrow plot and clustered line plot  
 Make the script executable with:
-```chmod +x pipeline.sh```
+```chmod +x pipeline_for_parallel_arrow_plot.sh```
 
 Then run it with:
-```./pipeline.sh```
+```./pipeline_for_parallel_arrow_plot.sh```
+or
+```./pipeline_for_parallel_arrow_plot.sh input_file```
