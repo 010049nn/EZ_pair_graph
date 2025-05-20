@@ -10,6 +10,6 @@ Make the script executable with:
 ```chmod +x pipeline_for_parallel_arrow_plot.sh```
 
 Then run it with:
-```./pipeline_for_parallel_arrow_plot.sh```
-or
-```./pipeline_for_parallel_arrow_plot.sh input_file```
+```./pipeline_for_parallel_arrow_plot.sh```  
+or  
+```./pipeline_for_parallel_arrow_plot.sh input_file```  
