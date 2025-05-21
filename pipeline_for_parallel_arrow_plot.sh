@@ -24,4 +24,7 @@ python clustered_line_plot.py
 echo "  3b: Running parallel_arrow_plot.py..."
 python parallel_arrow_plot.py
 
+echo "  3c: Running para_and_nonPara_plot.py with $INPUT_FILE..."
+python para_and_nonPara_plot.py "$INPUT_FILE"
+
 echo "Pipeline execution completed successfully"
