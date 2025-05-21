@@ -322,9 +322,9 @@ def main():
         print("Error processing data. Exiting.")
         return
     
-    create_visualization(sabun_up, sabun_tie, sabun_down, sorted_sabun_up, sorted_sabun_down, "parametric.pdf")
+    create_visualization(sabun_up, sabun_tie, sabun_down, sorted_sabun_up, sorted_sabun_down, "output_EZ/parametric.pdf")
     
-    create_nonpara_visualization(sabun_up, sabun_tie, sabun_down, sorted_sabun_up, sorted_sabun_down, "non_parametric.pdf")
+    create_nonpara_visualization(sabun_up, sabun_tie, sabun_down, sorted_sabun_up, sorted_sabun_down, "output_EZ/non_parametric.pdf")
     
     print("Done. PDF files have been created.")
 
