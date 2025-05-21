@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
 import re
 import os
+import sys
 
 def read_and_process_data(filepath):
     data = {}
@@ -308,8 +309,11 @@ def create_nonpara_visualization(sabun_up, sabun_tie, sabun_down, sorted_sabun_u
     plt.close()
 
 def main():
-    input_file = "test_dataset.txt"
-
+    if len(sys.argv) > 1:
+        input_file = sys.argv[1]
+    else:
+        input_file = "test_dataset.txt"
+        
     print(f"Processing data from: {input_file}")
     
     sabun_up, sabun_tie, sabun_down, sorted_sabun_up, sorted_sabun_down = read_and_process_data(input_file)
