@@ -13,3 +13,7 @@ Then run it with:
 ```./pipeline_for_parallel_arrow_plot.sh```  
 or  
 ```./pipeline_for_parallel_arrow_plot.sh input_file```  
+
+For EZ-pair graph of parametric and non-parametric test  
+Run it with
+```python para_and_nonPara_plot.py input_file```
