@@ -4,7 +4,12 @@
 set -e
 
 # Define input file
-INPUT_FILE="test_dataset.txt"
+if [ $# -eq 0 ]; then
+    echo "input_file is required"
+    exit 1
+fi
+# INPUT_FILE="test_dataset.txt"
+INPUT_FILE=$1
 
 # Step 1: Run the first Perl preparation script
 echo "Step 1: Running preparation_1.pl with $INPUT_FILE..."
