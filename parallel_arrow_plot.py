@@ -28,6 +28,7 @@ with PdfPages(pdf_filename) as pdf:
                         widths=0.15,
                         patch_artist=True,
                         labels=labels,
+                        showfliers=False,
                         zorder=1)
 
     for box in boxplot['boxes']:
