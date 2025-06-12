@@ -58,18 +58,18 @@ with PdfPages(pdf_filename) as pdf:
 
     calc_min = min(calculated_points['X_Mean'].min(), calculated_points['Y_Calculated_Mean'].min())
     calc_max = max(calculated_points['X_Mean'].max(), calculated_points['Y_Calculated_Mean'].max())
-    
+
     cluster_min = min(clustered_data['X'].min(), clustered_data['Y'].min())
     cluster_max = max(clustered_data['X'].max(), clustered_data['Y'].max())
-    
+
     overall_min = min(calc_min, cluster_min)
     overall_max = max(calc_max, cluster_max)
-    
+
     data_range = overall_max - overall_min
-    
+
     bottom_padding = data_range * 0.25
-    top_padding = data_range * 0.15   
-    
+    top_padding = data_range * 0.15
+
     y_min = overall_min - bottom_padding
     y_max = overall_max + top_padding
 
@@ -90,29 +90,22 @@ with PdfPages(pdf_filename) as pdf:
         triangle_height = 0.7
         triangle_width = 0.007 * line_width
 
+        ax.plot([arrow_x, arrow_x], [x_mean, y_mean],
+                color=color, linewidth=line_width, zorder=z_val)
+
         if y_mean > x_mean:
-            line_end_y = y_mean - triangle_height
-
-            ax.plot([arrow_x, arrow_x], [x_mean, line_end_y],
-                    color=color, linewidth=line_width, zorder=z_val)
-
             triangle = Polygon([
-                (arrow_x - triangle_width/2, line_end_y),
-                (arrow_x + triangle_width/2, line_end_y),
-                (arrow_x, y_mean)
+                (arrow_x - triangle_width/2, y_mean - triangle_height/2),
+                (arrow_x + triangle_width/2, y_mean - triangle_height/2),
+                (arrow_x, y_mean + triangle_height/2)
             ], closed=True, facecolor=color, edgecolor=color, zorder=z_val)
             ax.add_patch(triangle)
 
         else:
-            line_end_y = y_mean + triangle_height
-
-            ax.plot([arrow_x, arrow_x], [x_mean, line_end_y],
-                    color=color, linewidth=line_width, zorder=z_val)
-
             triangle = Polygon([
-                (arrow_x - triangle_width/2, line_end_y),
-                (arrow_x + triangle_width/2, line_end_y),
-                (arrow_x, y_mean)
+                (arrow_x - triangle_width/2, y_mean + triangle_height/2),
+                (arrow_x + triangle_width/2, y_mean + triangle_height/2),
+                (arrow_x, y_mean - triangle_height/2)
             ], closed=True, facecolor=color, edgecolor=color, zorder=z_val)
             ax.add_patch(triangle)
 
@@ -136,10 +129,10 @@ with PdfPages(pdf_filename) as pdf:
     ax.legend(loc='upper right', fontsize=10)
 
     copyright_text = "Copyright (c) 2025. RIKEN All rights reserved. This is for academic and non-commercial research use only.\nThe technology is currently under patent application. Commercial use is prohibited without a separate license agreement. E-mail: akihiro.ezoe@riken.jp"
-    
+
 
     plt.subplots_adjust(left=0.1, right=0.9, top=0.9, bottom=0.15)
-    
+
     plt.figtext(0.5, 0.02, copyright_text, ha='center', fontsize=8, color='black')
 
     pdf.savefig(fig, dpi=300, bbox_inches='tight')
