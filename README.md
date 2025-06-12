@@ -11,3 +11,5 @@ Make the script executable with:
 
 Then run it with:
 ```./pipeline_for_EZ_plot.sh input_file```  
+
+Output format is an editable PDF, enabling seamless incorporation into figures.
