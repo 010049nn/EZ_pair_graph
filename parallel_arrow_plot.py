@@ -55,20 +55,28 @@ with PdfPages(pdf_filename) as pdf:
     else:
         arrow_positions = [arrow_center_pos]
 
+    arrow_min = min(calculated_points['X_Mean'].min(), calculated_points['Y_Calculated_Mean'].min())
+    arrow_max = max(calculated_points['X_Mean'].max(), calculated_points['Y_Calculated_Mean'].max())
 
-    calc_min = min(calculated_points['X_Mean'].min(), calculated_points['Y_Calculated_Mean'].min())
-    calc_max = max(calculated_points['X_Mean'].max(), calculated_points['Y_Calculated_Mean'].max())
+    whisker_values = []
+    for whisker in boxplot['whiskers']:
+        whisker_data = whisker.get_ydata()
+        whisker_values.extend(whisker_data)
 
-    cluster_min = min(clustered_data['X'].min(), clustered_data['Y'].min())
-    cluster_max = max(clustered_data['X'].max(), clustered_data['Y'].max())
+    if whisker_values:
+        boxplot_min = min(whisker_values)
+        boxplot_max = max(whisker_values)
+    else:
+        boxplot_min = min(clustered_data['X'].quantile(0.25), clustered_data['Y'].quantile(0.25))
+        boxplot_max = max(clustered_data['X'].quantile(0.75), clustered_data['Y'].quantile(0.75))
 
-    overall_min = min(calc_min, cluster_min)
-    overall_max = max(calc_max, cluster_max)
+    overall_min = min(arrow_min, boxplot_min)
+    overall_max = max(arrow_max, boxplot_max)
 
     data_range = overall_max - overall_min
 
-    bottom_padding = data_range * 0.25
-    top_padding = data_range * 0.15
+    bottom_padding = data_range * 0.1
+    top_padding = data_range * 0.1
 
     y_min = overall_min - bottom_padding
     y_max = overall_max + top_padding
@@ -87,7 +95,7 @@ with PdfPages(pdf_filename) as pdf:
 
         arrow_x = arrow_positions[i]
 
-        triangle_height = 0.7
+        triangle_height = data_range * 0.03 
         triangle_width = 0.007 * line_width
 
         ax.plot([arrow_x, arrow_x], [x_mean, y_mean],
@@ -128,8 +136,8 @@ with PdfPages(pdf_filename) as pdf:
 
     ax.legend(loc='upper right', fontsize=10)
 
-    copyright_text = "Copyright (c) 2025. RIKEN All rights reserved. This is for academic and non-commercial research use only.\nThe technology is currently under patent application. Commercial use is prohibited without a separate license agreement. E-mail: akihiro.ezoe@riken.jp"
-
+    copyright_text = "Copyright (c) 2025. RIKEN All rights reserved. This is for academic and non-commercial research use only.\nThe technology is currently
+under patent application. Commercial use is prohibited without a separate license agreement. E-mail: akihiro.ezoe@riken.jp"
 
     plt.subplots_adjust(left=0.1, right=0.9, top=0.9, bottom=0.15)
 
@@ -147,3 +155,9 @@ with PdfPages(pdf_filename) as pdf:
 plt.show()
 
 print(f"Output file: '{pdf_filename}'")
+print(f"\nDebug information:")
+print(f"Number of arrows: {len(calculated_points_sorted)}")
+print(f"Arrow data range: {arrow_min:.2f} to {arrow_max:.2f}")
+print(f"Boxplot range: {boxplot_min:.2f} to {boxplot_max:.2f}")
+print(f"Y-axis range: {y_min:.2f} to {y_max:.2f}")
+print(f"Triangle height: {data_range * 0.03:.2f}")
