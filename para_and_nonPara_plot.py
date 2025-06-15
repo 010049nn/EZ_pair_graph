@@ -21,8 +21,8 @@ def read_and_process_data(filepath):
         for line in f:
             line_num += 1
             line = line.strip()
-            
-            match = re.match(r'^(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)', line)
+
+            match = re.match(r'^(-?\d+(?:\.\d+)?)\s+(-?\d+(?:\.\d+)?)', line)
             if match:
                 val1 = float(match.group(1))
                 val2 = float(match.group(2))
