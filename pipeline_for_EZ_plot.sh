@@ -13,7 +13,7 @@ INPUT_FILE=$1
 
 # Step 1: Run the first Perl preparation script
 echo "Step 1: Running preparation_1.pl with $INPUT_FILE..."
-perl preparation_1.pl "$INPUT_FILE" 8
+perl preparation_1.pl "$INPUT_FILE" 4
 # Expected output: clustered_data.txt
 
 # Step 2: Run the second Perl preparation script
