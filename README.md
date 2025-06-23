@@ -13,3 +13,6 @@ Then run it with:
 ```./pipeline_for_EZ_plot.sh input_file```  
 
 Output format is an editable PDF, enabling seamless incorporation into figures.
+
+
+![Image](https://github.com/user-attachments/assets/e9cd3600-b05f-44ae-8b45-cff018e310ba)
