@@ -12,7 +12,7 @@ Make the script executable with:
 Then run it with:
 ```./pipeline_for_EZ_plot.sh input_file```  
 
-Output format is an editable PDF, enabling seamless incorporation into figures.
+Output format is an editable PDF, enabling seamless incorporation into figures. The following images have been modified.
 
 
 ![Image](https://github.com/user-attachments/assets/f91cde18-4acd-4082-bd2e-3735907b1e3b)
