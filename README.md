@@ -12,6 +12,10 @@ Make the script executable with:
 Then run it with:
 ```./pipeline_for_EZ_plot.sh input_file```  
 
+The intermediate file clustered_data.txt contains the input data with an additional cluster number column.
+By setting this cluster number, it becomes possible to combine with any clustering method.
+Once saved as clustered_data.txt and the shell file procedures from step 2 onwards are executed, processing will be performed based on the arbitrary cluster numbers.
+
 Output format is an editable PDF, enabling seamless incorporation into figures. The following images have been modified.
 
 
