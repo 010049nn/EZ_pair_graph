@@ -136,8 +136,8 @@ with PdfPages(pdf_filename) as pdf:
 
     ax.legend(loc='upper right', fontsize=10)
 
-    copyright_text = "Copyright (c) 2025. RIKEN All rights reserved. This is for academic and non-commercial research use only.\nThe technology is currently
-under patent application. Commercial use is prohibited without a separate license agreement. E-mail: akihiro.ezoe@riken.jp"
+    copyright_text = """Copyright (c) 2025. RIKEN All rights reserved. This is for academic and non-commercial research use only.\nThe technology is currently
+under patent application. Commercial use is prohibited without a separate license agreement. E-mail: akihiro.ezoe@riken.jp"""
 
     plt.subplots_adjust(left=0.1, right=0.9, top=0.9, bottom=0.15)
 
