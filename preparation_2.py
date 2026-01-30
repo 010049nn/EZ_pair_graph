@@ -135,10 +135,8 @@ def main():
                 f.write(f"Statistics for Group {cluster}:\n")
                 f.write(f"X: Mean={s['x']['mean']:.4f}, Q1={s['x']['q1']:.4f}, Q2={s['x']['q2']:.4f}, Q3={s['x']['q3']:.4f}\n")
                 f.write(f"Y: Mean={s['y']['mean']:.4f}, Q1={s['y']['q1']:.4f}, Q2={s['y']['q2']:.4f}, Q3={s['y']['q3']:.4f}\n")
-                f.write(f"Diff: Mean={s['diff']['mean']:.4f}, Q1={s['diff']['q1']:.4f}, Q2={s['diff']['q2']:.4f}, Q3={s['diff']['q3']:
-.4f}\n")
-                f.write(f"Diff(trapezoid): Q1={s['diff']['q1_trapezoid']:.4f}, Q2={s['diff']['q2_trapezoid']:.4f}, Q3={s['diff']['q3_t
-rapezoid']:.4f}\n")
+                f.write(f"Diff: Mean={s['diff']['mean']:.4f}, Q1={s['diff']['q1']:.4f}, Q2={s['diff']['q2']:.4f}, Q3={s['diff']['q3']:.4f}\n")
+                f.write(f"Diff(trapezoid): Q1={s['diff']['q1_trapezoid']:.4f}, Q2={s['diff']['q2_trapezoid']:.4f}, Q3={s['diff']['q3_trapezoid']:.4f}\n")
                 f.write(f"Calculated: Q2s={s['calculated']['q2_start']:.4f}, Q2d={s['calculated']['q2_diff']:.4f}\n")
                 f.write("\n")
     except IOError as e:
@@ -151,8 +149,7 @@ rapezoid']:.4f}\n")
             for cluster in sorted(stats_results.keys()):
                 s = stats_results[cluster]
                 c = s['calculated']
-                f.write(f"{cluster}\t{c['mean_point'][0]:.4f}\t{c['mean_point'][1]:.4f}\t{c['median_point'][0]:.4f}\t{c['median_point'
-][1]:.4f}\t{c['n']}\n")
+                f.write(f"{cluster}\t{c['mean_point'][0]:.4f}\t{c['mean_point'][1]:.4f}\t{c['median_point'][0]:.4f}\t{c['median_point'][1]:.4f}\t{c['n']}\n")
     except IOError as e:
         print(f"Error writing to {calc_file}: {e}")
         sys.exit(1)
