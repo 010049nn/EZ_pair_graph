@@ -313,9 +313,7 @@ def main():
     cbar_blue.ax.set_xlabel('g_num', fontsize=10)
     cbar_blue.ax.tick_params(labelsize=9)
 
-    copyright_text = "Copyright (c) 2025. RIKEN All rights reserved. This is for academic and non-commercial research use only.\nThe t
-echnology is currently under patent application. Commercial use is prohibited without a separate license agreement. E-mail: akihiro.ez
-oe@riken.jp"
+    copyright_text = "Copyright (c) 2025. RIKEN All rights reserved. This is for academic and non-commercial research use only.\nThe technology is currently under patent application. Commercial use is prohibited without a separate license agreement. E-mail: akihiro.ezoe@riken.jp"
     plt.figtext(0.5, 0.01, copyright_text, ha='center', fontsize=8, color='black')
 
     plt.subplots_adjust(bottom=0.15, top=0.88)
