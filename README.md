@@ -14,7 +14,7 @@ ns.
 ## Quick Start
 
 ```bash
-bash pipeline_for_EZ_plot.sh data.txt
+bash pipeline_for_EZ_plot.sh test_dataset.txt
 ```
 
 ## Input File Format
