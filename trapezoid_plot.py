@@ -321,7 +321,7 @@ def create_visualization(sabun_up, sabun_tie, sabun_down, sorted_sabun_up, sorte
         num_down_filtered = len(sorted_sabun_down)
         q1_idx, q2_idx, q3_idx = calculate_quartiles(num_down_filtered)
         
-        sorted_by_slope_down = sorted(sabun_down.copy(), key=lambda x: x[2], reverse=False)
+        sorted_by_slope_down = sorted(sabun_down.copy(), key=lambda x: x[2], reverse=True)
         
         q1_start = sorted_sabun_down[q1_idx][0]
         q1_diff = sorted_by_slope_down[q1_idx][2]
