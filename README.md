@@ -8,14 +8,77 @@ E-mail: akihiro.ezoe@riken.jp
 
 ## Overview
 
-This pipeline generates multiple visualizations for paired data (X, Y values) analysis, including clustering and statistical compariso
-ns.
+This pipeline generates multiple visualizations for paired data (X, Y values) analysis, including clustering and statistical comparisons.
 
 ## Quick Start
 
 ```bash
 bash pipeline_for_EZ_plot.sh test_dataset.txt
 ```
+
+## Docker
+
+You can run the pipeline in a Docker container without installing dependencies locally.
+
+### Prerequisites
+
+- [Docker](https://docs.docker.com/get-docker/) installed
+
+### Build
+
+```bash
+docker build -t ez_pair_graph .
+```
+
+### Run with test data
+
+```bash
+docker run --rm \
+    -v $(pwd)/output_EZ:/app/output_EZ \
+    ez_pair_graph \
+    bash ./pipeline_for_EZ_plot.sh test_dataset.txt
+```
+
+### Run with your own data
+
+Place your input file in a `data/` directory, then:
+
+```bash
+docker run --rm \
+    -v $(pwd)/data:/data \
+    -v $(pwd)/output_EZ:/app/output_EZ \
+    ez_pair_graph \
+    bash ./pipeline_for_EZ_plot.sh /data/your_input.txt
+```
+
+### Examples with options
+
+```bash
+# SVG output with log2 transformation
+docker run --rm \
+    -v $(pwd)/data:/data \
+    -v $(pwd)/output_EZ:/app/output_EZ \
+    ez_pair_graph \
+    bash ./pipeline_for_EZ_plot.sh /data/your_input.txt --format svg --log2
+
+# HDBSCAN clustering
+docker run --rm \
+    -v $(pwd)/data:/data \
+    -v $(pwd)/output_EZ:/app/output_EZ \
+    ez_pair_graph \
+    bash ./pipeline_for_EZ_plot.sh /data/your_input.txt --method hdbscan --min_cluster_size 3
+```
+
+### Using Make (shortcut)
+
+```bash
+make build                                    # Build image
+make test                                     # Run with test data
+make plot FILE=data/input.txt                 # Run with your data
+make plot FILE=data/input.txt OPTS="--log2"   # Run with options
+```
+
+Results are saved in the `output_EZ/` directory.
 
 ## Input File Format
 
@@ -91,11 +154,9 @@ Example: `--output-prefix wheat_exp1` produces:
 
 ### --no-outliers
 
-When enabled, data points outside the boxplot whisker range (Q1 - 1.5×IQR to Q3 + 1.5×IQR) are excluded from visualization elements (l
-ines, bands, arrows). This helps focus on the main data distribution.
+When enabled, data points outside the boxplot whisker range (Q1 - 1.5×IQR to Q3 + 1.5×IQR) are excluded from visualization elements (lines, bands, arrows). This helps focus on the main data distribution.
 
-Note: The sample counts (n=) displayed with `--show-numbers` still reflect the **total** number of ascending/descending samples, not t
-he filtered count. This allows you to see both the full group sizes and the filtered visualization.
+Note: The sample counts (n=) displayed with `--show-numbers` still reflect the **total** number of ascending/descending samples, not the filtered count. This allows you to see both the full group sizes and the filtered visualization.
 
 ### --log2
 
@@ -132,8 +193,7 @@ Selects the clustering algorithm:
 
 ### --max_k
 
-Maximum number of clusters to consider for hierarchical clustering. The algorithm uses the elbow method to find the optimal number up
-to this limit.
+Maximum number of clusters to consider for hierarchical clustering. The algorithm uses the elbow method to find the optimal number up to this limit.
 
 Default: 7
 
@@ -154,8 +214,7 @@ Default: 5
 
 ### --min_samples
 
-Number of samples in a neighborhood for a point to be considered a core point in HDBSCAN. If not specified, defaults to min_cluster_si
-ze.
+Number of samples in a neighborhood for a point to be considered a core point in HDBSCAN. If not specified, defaults to min_cluster_size.
 
 ## Output Files
 
@@ -218,8 +277,7 @@ bash pipeline_for_EZ_plot.sh data.txt --method hierarchical --max_k 5 --linkage 
 
 Full options example:
 ```bash
-bash pipeline_for_EZ_plot.sh data.txt --format svg --log2 --no-outliers --show-numbers --output-prefix my_analysis --method hierarchic
-al --max_k 10
+bash pipeline_for_EZ_plot.sh data.txt --format svg --log2 --no-outliers --show-numbers --output-prefix my_analysis --method hierarchical --max_k 10
 ```
 
 ## Individual Script Usage
@@ -247,6 +305,5 @@ Note: All scripts read from `output_EZ/clustered_data.txt`, so `preparation_1.py
 
 This software is for academic and non-commercial research use only.
 Commercial use is prohibited without a separate license agreement.
-
 
 <img width="2403" height="883" alt="Image" src="https://github.com/user-attachments/assets/a0fb21c0-dde7-4ff6-9e51-be7fa00f9cbf" />
