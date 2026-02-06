@@ -66,17 +66,6 @@ X Y
 3.1 4.2
 ```
 
-## Pipeline Steps
-
-1. **preparation_1.py** - Clustering analysis
-2. **preparation_2.py** - Statistical calculations
-3. **slopegraph.py** - Simple slope graph
-4. **clustered_line_plot.py** - Clustered line plot with boxplots
-5. **parallel_arrow_plot.py** - Parallel arrow plot
-6. **trapezoid_plot.py** - Trapezoid plot with quartile bands
-
-All visualization scripts read from `output_EZ/clustered_data.txt` to ensure consistent data across all plots.
-
 ## Command Line Options
 
 ### Output Options
