@@ -8,7 +8,7 @@ E-mail: akihiro.ezoe@riken.jp
 
 ## Overview
 
-This pipeline generates multiple visualizations for paired data (X, Y values) analysis, including clustering and statistical comparisons.
+This pipeline generates multiple visualizations for paired data (X, Y values) analysis.
 
 ## Quick Start
 
@@ -19,10 +19,6 @@ bash pipeline_for_EZ_plot.sh test_dataset.txt
 ## Docker
 
 You can run the pipeline in a Docker container without installing dependencies locally.
-
-### Prerequisites
-
-- [Docker](https://docs.docker.com/get-docker/) installed
 
 ### Build
 
@@ -51,38 +47,11 @@ docker run --rm \
     bash ./pipeline_for_EZ_plot.sh /data/your_input.txt
 ```
 
-### Examples with options
-
-```bash
-# SVG output with log2 transformation
-docker run --rm \
-    -v $(pwd)/data:/data \
-    -v $(pwd)/output_EZ:/app/output_EZ \
-    ez_pair_graph \
-    bash ./pipeline_for_EZ_plot.sh /data/your_input.txt --format svg --log2
-
-# HDBSCAN clustering
-docker run --rm \
-    -v $(pwd)/data:/data \
-    -v $(pwd)/output_EZ:/app/output_EZ \
-    ez_pair_graph \
-    bash ./pipeline_for_EZ_plot.sh /data/your_input.txt --method hdbscan --min_cluster_size 3
-```
-
-### Using Make (shortcut)
-
-```bash
-make build                                    # Build image
-make test                                     # Run with test data
-make plot FILE=data/input.txt                 # Run with your data
-make plot FILE=data/input.txt OPTS="--log2"   # Run with options
-```
-
 Results are saved in the `output_EZ/` directory.
 
 ## Input File Format
 
-The input file should contain paired X and Y values. The following formats are supported:
+The input file should contain paired X and Y values. The following formats are accepted:
 
 - Space-separated values
 - Tab-separated values
@@ -191,12 +160,6 @@ Selects the clustering algorithm:
 - Does not require specifying cluster count
 - Better for datasets with varying cluster densities
 
-### --max_k
-
-Maximum number of clusters to consider for hierarchical clustering. The algorithm uses the elbow method to find the optimal number up to this limit.
-
-Default: 7
-
 ### --linkage
 
 Linkage method for hierarchical clustering:
@@ -206,28 +169,9 @@ Linkage method for hierarchical clustering:
 - **average**: Average distance between cluster members. Balanced approach.
 - **single**: Minimum distance between cluster members. Can create elongated clusters.
 
-### --min_cluster_size
-
-Minimum number of points required to form a cluster in HDBSCAN. Points in smaller groups are treated as noise.
-
-Default: 5
-
-### --min_samples
-
-Number of samples in a neighborhood for a point to be considered a core point in HDBSCAN. If not specified, defaults to min_cluster_size.
-
 ## Output Files
 
 All output files are saved in the `output_EZ/` directory.
-
-### Data Files
-
-| File | Description |
-|------|-------------|
-| `clustered_data.txt` | Clustered data with X, Y, and Cluster columns |
-| `calculated_points.txt` | Calculated statistics for each cluster |
-| `group_statistics.txt` | Detailed statistics per group |
-| `.log2_transformed` | Marker file indicating log2 transformation was applied |
 
 ### Plot Files
 
@@ -240,20 +184,7 @@ All output files are saved in the `output_EZ/` directory.
 
 Note: `[PREFIX_]` is included only if `--output-prefix` is specified.
 
-## Data Processing
-
-### Data Consistency
-
-All visualization scripts read from `output_EZ/clustered_data.txt` to ensure:
-- Consistent data point counts across all plots
-- Identical ascending/descending group classifications
-
 ## Usage Examples
-
-Basic usage:
-```bash
-bash pipeline_for_EZ_plot.sh data.txt
-```
 
 With output prefix:
 ```bash
@@ -265,33 +196,10 @@ Output as PNG with log2 transformation and prefix:
 bash pipeline_for_EZ_plot.sh data.txt --format png --log2 --output-prefix wheat_data
 ```
 
-HDBSCAN clustering with custom parameters:
-```bash
-bash pipeline_for_EZ_plot.sh data.txt --method hdbscan --min_cluster_size 3
-```
-
-Hierarchical clustering with specific settings:
-```bash
-bash pipeline_for_EZ_plot.sh data.txt --method hierarchical --max_k 5 --linkage complete
-```
-
 Full options example:
 ```bash
 bash pipeline_for_EZ_plot.sh data.txt --format svg --log2 --no-outliers --show-numbers --output-prefix my_analysis --method hierarchical --max_k 10
 ```
-
-## Individual Script Usage
-
-Each visualization script can be run independently after running the preparation scripts:
-
-```bash
-python slopegraph.py --format png --log2 --show-numbers --output-prefix mydata
-python clustered_line_plot.py --format svg --no-outliers --output-prefix mydata
-python parallel_arrow_plot.py --format pdf --show-numbers --output-prefix mydata
-python trapezoid_plot.py --format png --log2 --output-prefix mydata
-```
-
-Note: All scripts read from `output_EZ/clustered_data.txt`, so `preparation_1.py` must be run first.
 
 ## Dependencies
 
