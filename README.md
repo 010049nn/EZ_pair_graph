@@ -249,4 +249,4 @@ This software is for academic and non-commercial research use only.
 Commercial use is prohibited without a separate license agreement.
 
 
-![Image](https://github.com/user-attachments/assets/f91cde18-4acd-4082-bd2e-3735907b1e3b)
+<img width="2403" height="883" alt="Image" src="https://github.com/user-attachments/assets/a0fb21c0-dde7-4ff6-9e51-be7fa00f9cbf" />
