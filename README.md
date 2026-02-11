@@ -1,10 +1,4 @@
-# EZ Plot Pipeline
-
-Copyright (c) 2025. RIKEN All rights reserved.
-This is for academic and non-commercial research use only.
-The technology is currently under patent application.
-Commercial use is prohibited without a separate license agreement.
-E-mail: akihiro.ezoe@riken.jp
+# EZ-pair graph pipeline 
 
 ## Overview
 
