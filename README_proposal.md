@@ -53,7 +53,7 @@ This section walks through a complete analysis using the included test dataset.
 docker run --rm \
     -v $(pwd)/output_EZ:/app/output_EZ \
     ez_pair_graph \
-    bash ./pipeline_for_EZ_plot.sh test_dataset.txt
+    bash ./pipeline_for_EZ_plot.sh test_dataset.txt --no-outliers --show-numbers
 
 # Or locally
 bash pipeline_for_EZ_plot.sh test_dataset.txt
