@@ -6,12 +6,11 @@
 
 EZ-Pair Graph is a suite of visualization methods that summarizes large-scale paired data while preserving directional and magnitude information on a unified axis. It produces three complementary plot types:
 
-| Plot | Best for | Description |
-|------|----------|-------------|
-| **Trapezoid plot** | Quick summary of overall trends | Summarizes ascending/descending groups using quartile-based trapezoids |
-| **Clustered line plot** | Detecting subgroup patterns | Groups paired connections by clustering, with color intensity indicating cluster size |
-| **Parallel arrow plot** | Comparing direction and magnitude | Displays clustered differences as parallel arrows between boxplots |
-
+| Plot | Description |
+|------|-------------|
+| **Trapezoid plot** | Splits paired data into ascending and descending groups; quartile points (Q1–Q3) of starting positions and differences are connected to form a summary trapezoid. Line thickness is proportional to the number of observations. |
+| **Clustered line plot** | Clusters paired connections within each directional group; each cluster is represented by its median summary line (Q2s, Q2d). Color intensity and line thickness indicate cluster size. |
+| **Parallel arrow plot** | Renders each cluster's summary line as a vertical arrow between boxplots. Upward arrows indicate ascending groups; downward arrows indicate descending groups. Arrow thickness and color reflect group size. |
 These methods are particularly effective for datasets where conventional visualizations (slope graphs, Bland-Altman plots) suffer from visual saturation.
 
 Output example of test_dataset.txt
