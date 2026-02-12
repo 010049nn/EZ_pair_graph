@@ -18,7 +18,9 @@ EZ-Pair Graph is a suite of visualization methods that summarizes large-scale pa
 
 These methods are particularly effective for datasets where conventional visualizations (slope graphs, Bland-Altman plots) suffer from visual saturation.
 
-<img width="2403" height="883" alt="EZ-Pair Graph output examples" src="https://github.com/user-attachments/assets/a0fb21c0-dde7-4ff6-9e51-be7fa00f9cbf" />
+<img width="2403" height="948" alt="Image" src="https://github.com/user-attachments/assets/fc48b50b-d241-4a5f-88ff-07f7dcc0b786" />
+
+<img width="2291" height="814" alt="Image" src="https://github.com/user-attachments/assets/721f6fbf-37f4-4cbb-9dc5-66bff679ccae" />
 
 ## Installation
 
