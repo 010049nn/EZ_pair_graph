@@ -207,6 +207,7 @@ If you use EZ-Pair Graph in your research, please cite:
 ## License
 
 [![License: Academic/Non-commercial](https://img.shields.io/badge/License-Academic%2FNon--commercial-blue.svg)](LICENSE.md)
+
 Free for academic and research use. See [LICENSE.md](LICENSE.md) for details.
 
 ## Contact
