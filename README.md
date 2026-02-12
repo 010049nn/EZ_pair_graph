@@ -129,13 +129,11 @@ docker run --rm \
     bash ./pipeline_for_EZ_plot.sh /data/your_data.txt --output-prefix my_analysis --show-numbers
 ```
 
-### For gene expression data (log-scale)
+### For log-scale data
 
 ```bash
 bash pipeline_for_EZ_plot.sh expression_data.txt --log2 --output-prefix gene_exp
 ```
-
-Non-positive values are automatically handled (replaced with 1e-10 before log2 transformation).
 
 ## Clustering Methods
 
