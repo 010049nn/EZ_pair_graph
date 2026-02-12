@@ -4,7 +4,7 @@
 
 ## Overview
 
-EZ-Pair Graph is a suite of visualization methods that summarizes large-scale paired data while preserving directional and magnitude information on a unified axis. It produces three complementary plot types:
+EZ-Pair Graph is a suite of visualization methods that summarizes large-scale paired data while preserving directional and magnitude information on a unified axis. It produces three plot types:
 
 | Plot | Description |
 |------|-------------|
