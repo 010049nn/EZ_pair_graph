@@ -1,0 +1,12 @@
+services:
+  ez_pair_graph:
+    build: .
+    container_name: ez_pair_graph
+    volumes:
+      # Mount data directory for input/output files
+      - ./data:/data
+      - ./output_EZ:/app/output_EZ
+    working_dir: /app
+    stdin_open: true
+    tty: true
+    command: /bin/bash
