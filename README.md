@@ -196,8 +196,6 @@ All output files are saved in the `output_EZ/` directory.
 - Matplotlib
 - SciPy
 
-All clustering algorithms (hierarchical and HDBSCAN) are implemented natively using NumPy/SciPy. No additional packages are required.
-
 ## Citation
 
 If you use EZ-Pair Graph in your research, please cite:
