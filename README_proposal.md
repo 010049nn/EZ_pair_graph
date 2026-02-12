@@ -206,7 +206,7 @@ All clustering algorithms (hierarchical and HDBSCAN) are implemented natively us
 
 If you use EZ-Pair Graph in your research, please cite:
 
-> Ezoe, A., Seki, M. and Mochida, K. EZ-Pair Graph: A scalable unified-axis visualization for summarizing large-scale paired data. *Bioinformatics Advances* (2025).
+> Ezoe, A., Seki, M. and Mochida, K. EZ-Pair Graph: A scalable unified-axis visualization for summarizing large-scale paired data. *Under review* (2026).
 
 ## License
 
