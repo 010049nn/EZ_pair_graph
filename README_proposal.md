@@ -2,10 +2,6 @@
 
 **A scalable unified-axis visualization for summarizing large-scale paired data**
 
-[![License: Academic/Non-commercial](https://img.shields.io/badge/License-Academic%2FNon--commercial-blue.svg)](LICENSE.md)
-
-Free for academic and research use. See [LICENSE.md](LICENSE.md) for details.
-
 ## Overview
 
 EZ-Pair Graph is a suite of visualization methods that summarizes large-scale paired data while preserving directional and magnitude information on a unified axis. It produces three complementary plot types:
@@ -210,7 +206,8 @@ If you use EZ-Pair Graph in your research, please cite:
 
 ## License
 
-This software is free for academic and non-commercial research use. See [LICENSE.md](LICENSE.md) for full terms.
+[![License: Academic/Non-commercial](https://img.shields.io/badge/License-Academic%2FNon--commercial-blue.svg)](LICENSE.md)
+Free for academic and research use. See [LICENSE.md](LICENSE.md) for details.
 
 ## Contact
 
