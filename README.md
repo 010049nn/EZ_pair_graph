@@ -132,7 +132,7 @@ docker run --rm \
 ### For log-scale data
 
 ```bash
-bash pipeline_for_EZ_plot.sh expression_data.txt --log2 --output-prefix log_data
+bash pipeline_for_EZ_plot.sh your_log_scale_data.txt --log2 --output-prefix log_data
 ```
 
 ## Clustering Methods
