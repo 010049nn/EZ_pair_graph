@@ -53,7 +53,7 @@ docker run --rm \
     ez_pair_graph \
     bash ./pipeline_for_EZ_plot.sh test_dataset.txt --no-outliers --show-numbers
 ```
-```
+```bash
 # Or locally
 bash pipeline_for_EZ_plot.sh test_dataset.txt --no-outliers --show-numbers
 ```
