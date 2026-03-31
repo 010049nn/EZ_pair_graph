@@ -22,7 +22,21 @@ Output example of test_dataset_n1000.txt
 
 ## Installation
 
-### Option 1: Docker (recommended)
+### Option 1: pip install (recommended)
+
+```bash
+pip install ez-pair-graph
+```
+
+Or install from source:
+
+```bash
+git clone https://github.com/010049nn/EZ_pair_graph.git
+cd EZ_pair_graph
+pip install -e .
+```
+
+### Option 2: Docker
 
 ```bash
 git clone https://github.com/010049nn/EZ_pair_graph.git
@@ -30,19 +44,61 @@ cd EZ_pair_graph
 docker build -t ez_pair_graph .
 ```
 
-### Option 2: Local installation
+## Quick Start: Python API
 
-Requires Python 3.x with the following packages:
+```python
+import ez_pair_graph as ezpg
 
-```bash
-pip install numpy pandas matplotlib scipy
+# From a data file
+ezpg.plot("data.txt")
+
+# From numpy arrays
+import numpy as np
+x = np.random.normal(50, 10, 1000)
+y = x + np.random.normal(2, 5, 1000)
+ezpg.plot_array(x, y, format="png")
+
+# From a pandas DataFrame
+import pandas as pd
+df = pd.read_csv("data.csv")
+ezpg.plot_dataframe(df, x_col="before", y_col="after")
+
+# Generate specific plots only
+ezpg.plot("data.txt", plots=["trapezoid", "parallel_arrow"])
+
+# With options
+ezpg.plot("data.txt", format="svg", log2=True, no_outliers=True, show_numbers=True)
 ```
 
-No additional external libraries are required. HDBSCAN clustering is implemented natively without external dependencies.
+## Quick Start: Command Line (pip)
 
-## Tutorial: Getting Started with the Test Dataset
+```bash
+# Basic usage
+ez-pair-graph data.txt
 
-This section walks through a complete analysis using the included test dataset.
+# PNG output with specific plots
+ez-pair-graph data.txt --format png --plots trapezoid clustered_line
+
+# With clustering options
+ez-pair-graph data.txt --method hdbscan --min-cluster-size 3
+
+# All options
+ez-pair-graph data.txt --format svg --log2 --no-outliers --show-numbers
+```
+
+## Demo Notebook
+
+A comprehensive Jupyter notebook is included: [`demo_ez_pair_graph.ipynb`](demo_ez_pair_graph.ipynb)
+
+The notebook covers:
+- Generating all four plot types from synthetic data
+- Working with NumPy arrays, pandas DataFrames, and CSV files
+- Comparing hierarchical and HDBSCAN clustering methods
+- Log2 transformation for expression data
+- Large-scale data visualization (n > 1,000)
+- Accessing per-cluster statistics
+
+## Tutorial: Docker / Shell Script Workflow
 
 ### Step 1: Run the pipeline
 
@@ -118,11 +174,24 @@ Supported formats: space-separated, tab-separated, or comma-separated (CSV).
 
 ### Running the analysis
 
-```bash
-# Local
-bash pipeline_for_EZ_plot.sh your_data.txt --output-prefix my_analysis --show-numbers
+**Python API:**
+```python
+import ez_pair_graph as ezpg
+ezpg.plot("your_data.txt", format="png", show_numbers=True)
+```
 
-# Docker
+**pip command line:**
+```bash
+ez-pair-graph your_data.txt --format png --show-numbers
+```
+
+**Shell script (local):**
+```bash
+bash pipeline_for_EZ_plot.sh your_data.txt --output-prefix my_analysis --show-numbers
+```
+
+**Docker:**
+```bash
 docker run --rm \
     -v $(pwd)/data:/data \
     -v $(pwd)/output_EZ:/app/output_EZ \
@@ -133,6 +202,10 @@ docker run --rm \
 ### For log-scale data
 
 ```bash
+# pip
+ez-pair-graph your_data.txt --log2
+
+# Shell script
 bash pipeline_for_EZ_plot.sh your_log_scale_data.txt --log2 --output-prefix log_data
 ```
 
@@ -150,31 +223,44 @@ EZ-Pair Graph provides two deterministic clustering algorithms, both of which pr
 
 - Density-based clustering that does not require specifying the number of clusters
 - Better for datasets with varying cluster densities
+- Native implementation — no additional external dependencies required
 - Controlled by `--min_cluster_size` (default: 5) and `--min_samples`
 
 Observations are first separated by direction of change (ascending: B−A ≥ 0; descending: B−A < 0), and clustering is performed independently within each group. Clusters whose median points fall outside the 1.5×IQR whisker range of the boxplots are treated as outliers and excluded from the visualization.
 
 ## Command Line Options
 
-### Output Options
+### pip CLI (`ez-pair-graph`)
 
 | Option | Description |
 |--------|-------------|
 | `--format FORMAT` | Output format: `pdf` (default), `svg`, `png`, `html`, `json` |
-| `--output-prefix PREFIX` | Prefix for output filenames (e.g., 'exp1' creates exp1_slopegraph.pdf) |
+| `--output-dir DIR` | Output directory (default: output_EZ) |
+| `--output-prefix PREFIX` | Prefix for output filenames |
+| `--plots TYPES` | Plot types: `slopegraph`, `trapezoid`, `clustered_line`, `parallel_arrow` |
 | `--no-outliers` | Hide outliers in boxplots |
 | `--log2` | Apply log2 transformation to values |
 | `--show-numbers` | Display cluster numbers or sample counts on plots |
+| `--method METHOD` | Clustering method: `hierarchical` (default) or `hdbscan` |
+| `--max-k N` | Maximum number of clusters for hierarchical clustering (default: 7) |
+| `--linkage METHOD` | Linkage method: `ward` (default), `complete`, `average`, `single` |
+| `--min-cluster-size N` | Minimum cluster size for HDBSCAN (default: 5) |
+| `--min-samples N` | Minimum samples for HDBSCAN core points |
 
-### Clustering Options
+### Shell script (`pipeline_for_EZ_plot.sh`)
 
 | Option | Description |
 |--------|-------------|
+| `--format FORMAT` | Output format: `pdf` (default), `svg`, `png`, `html`, `json` |
+| `--output-prefix PREFIX` | Prefix for output filenames |
+| `--no-outliers` | Hide outliers in boxplots |
+| `--log2` | Apply log2 transformation to values |
+| `--show-numbers` | Display cluster numbers or sample counts on plots |
 | `--method METHOD` | Clustering method: `hierarchical` (default) or `hdbscan` |
 | `--max_k N` | Maximum number of clusters for hierarchical clustering (default: 7) |
-| `--linkage METHOD` | Linkage method: `ward` (default), `complete`, `average`, `single` |
+| `--linkage METHOD` | Linkage method: `ward`, `complete`, `average`, `single` |
 | `--min_cluster_size N` | Minimum cluster size for HDBSCAN (default: 5) |
-| `--min_samples N` | Minimum samples for HDBSCAN core points (default: None) |
+| `--min_samples N` | Minimum samples for HDBSCAN core points |
 
 ## Output Files
 
@@ -191,17 +277,17 @@ All output files are saved in the `output_EZ/` directory.
 
 ## Dependencies
 
-- Python 3.x
-- NumPy
-- Pandas
-- Matplotlib
-- SciPy
+- Python >= 3.8
+- NumPy >= 1.20
+- pandas >= 1.3
+- matplotlib >= 3.4
+- SciPy >= 1.7
 
 ## Citation
 
 If you use EZ-Pair Graph in your research, please cite:
 
-> Ezoe, A., Seki, M. and Mochida, K. EZ-Pair Graph: A scalable unified-axis visualization for summarizing large-scale paired data. *Under review* (2026).
+> Ezoe, A., Seki, M. and Mochida, K. EZ-Pair Graph: A scalable unified-axis visualization for summarizing large-scale paired data. *Bioinformatics Advances* (2026).
 
 ## License
 
@@ -211,5 +297,5 @@ Only for academic and research use. See [LICENSE.md](LICENSE.md) for details.
 
 ## Contact
 
-Akihiro Ezoe — akihiro.ezoe@riken.jp  
+Akihiro Ezoe — akihiro.ezoe@riken.jp
 RIKEN Center for Sustainable Resource Science
