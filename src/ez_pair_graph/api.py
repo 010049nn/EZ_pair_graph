@@ -140,7 +140,7 @@ def plot(input_file, output_dir="output_EZ", format="pdf", plots=None,
 
     x, y = data[:, 0], data[:, 1]
 
-    # Cluster data
+    # Cluster data (without log2, we'll apply log2 in plotting if requested)
     cluster_result = cluster_data(
         x, y,
         method=method,
@@ -148,11 +148,11 @@ def plot(input_file, output_dir="output_EZ", format="pdf", plots=None,
         linkage_method=linkage_method,
         min_cluster_size=min_cluster_size,
         min_samples=min_samples,
-        log2=log2,
+        log2=False,  # Don't log2 during clustering, let plotting handle it
     )
     clusters = cluster_result["clusters"]
 
-    # Compute statistics
+    # Compute statistics (on original scale)
     stats = compute_statistics(x, y, clusters)
 
     # Set output prefix
@@ -271,7 +271,7 @@ def plot_array(x, y, output_dir="output_EZ", format="pdf", plots=None, **kwargs)
     log2 = kwargs.get("log2", False)
     show_numbers = kwargs.get("show_numbers", False)
 
-    # Cluster data
+    # Cluster data (without log2, we'll apply log2 in plotting if requested)
     cluster_result = cluster_data(
         x, y,
         method=method,
@@ -279,11 +279,11 @@ def plot_array(x, y, output_dir="output_EZ", format="pdf", plots=None, **kwargs)
         linkage_method=linkage_method,
         min_cluster_size=min_cluster_size,
         min_samples=min_samples,
-        log2=log2,
+        log2=False,  # Don't log2 during clustering, let plotting handle it
     )
     clusters = cluster_result["clusters"]
 
-    # Compute statistics
+    # Compute statistics (on original scale)
     stats = compute_statistics(x, y, clusters)
 
     _ensure_output_dir(output_dir)

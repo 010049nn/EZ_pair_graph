@@ -417,18 +417,26 @@ def _calculate_quartile_indices(n):
 
 
 def _calculate_stats(values):
+    """Calculate mean and quartiles for values (matches preparation_2.py exactly)."""
     n = len(values)
     if n == 0:
         return 0, 0, 0, 0, 0
+
     sorted_values = sorted(values)
     mean = sum(sorted_values) / n
+
     q1_idx, q2_idx, q3_idx = _calculate_quartile_indices(n)
-    return mean, sorted_values[q1_idx], sorted_values[q2_idx], sorted_values[q3_idx], n
+
+    q1 = sorted_values[q1_idx]
+    q2 = sorted_values[q2_idx]
+    q3 = sorted_values[q3_idx]
+
+    return mean, q1, q2, q3, n
 
 
 def compute_statistics(x, y, clusters):
     """
-    Compute group statistics for clustered paired data.
+    Compute group statistics for clustered paired data (matches preparation_2.py exactly).
 
     Parameters
     ----------
@@ -463,6 +471,7 @@ def compute_statistics(x, y, clusters):
         diff_values = [p[2] for p in group_data]
 
         m = len(group_data)
+
         x_mean, x_q1, x_q2, x_q3, _ = _calculate_stats(x_values)
         y_mean, y_q1, y_q2, y_q3, _ = _calculate_stats(y_values)
 
@@ -479,9 +488,13 @@ def compute_statistics(x, y, clusters):
             q3_start = sorted_by_x[q3_idx][0]
             q3_diff = sorted_by_diff[q3_idx][2]
         else:
-            q2_start, q2_diff = x_q2, y_q2 - x_q2
-            q1_start, q1_diff = x_q1, y_q1 - x_q1
-            q3_start, q3_diff = x_q3, y_q3 - x_q3
+            q2_start = x_q2
+            q2_diff = y_q2 - x_q2
+            calc_y_q2 = q2_start + q2_diff
+            q1_start = x_q1
+            q1_diff = y_q1 - x_q1
+            q3_start = x_q3
+            q3_diff = y_q3 - x_q3
 
         diff_mean, diff_q1, diff_q2, diff_q3, _ = _calculate_stats(diff_values)
 
@@ -489,10 +502,18 @@ def compute_statistics(x, y, clusters):
             "x": {"mean": x_mean, "q1": x_q1, "q2": x_q2, "q3": x_q3},
             "y": {"mean": y_mean, "q1": y_q1, "q2": y_q2, "q3": y_q3},
             "diff": {
-                "mean": diff_mean, "q1": diff_q1, "q2": diff_q2, "q3": diff_q3,
-                "q1_trapezoid": q1_diff, "q2_trapezoid": q2_diff, "q3_trapezoid": q3_diff,
+                "mean": diff_mean,
+                "q1": diff_q1,
+                "q2": diff_q2,
+                "q3": diff_q3,
+                "q1_trapezoid": q1_diff,
+                "q2_trapezoid": q2_diff,
+                "q3_trapezoid": q3_diff
             },
             "calculated": {
+                "mean_point": [q2_start, q2_start + q2_diff],
+                "median_point": [q2_start, q2_start + q2_diff],
+                "n": m,
                 "q2_start": q2_start,
                 "q2_diff": q2_diff,
                 "q2_end": q2_start + q2_diff,
@@ -500,7 +521,6 @@ def compute_statistics(x, y, clusters):
                 "q1_diff": q1_diff,
                 "q3_start": q3_start,
                 "q3_diff": q3_diff,
-                "n": m,
             },
         }
 
