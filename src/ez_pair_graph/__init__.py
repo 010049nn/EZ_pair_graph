@@ -50,7 +50,21 @@ def _run_pipeline(x, y, output_dir='output_EZ', format='pdf',
     Returns dict of {plot_name: filepath}.
     """
     import matplotlib
-    matplotlib.use('Agg')
+    # Only force non-interactive backend when no display backend is already
+    # active.  In Jupyter / Colab the inline backend is set at import time;
+    # overriding it with 'Agg' would suppress all inline figure display for
+    # the rest of the session.
+    try:
+        current_backend = matplotlib.get_backend()
+        if current_backend in ('agg', 'Agg', ''):
+            pass  # already non-interactive, fine
+        elif 'inline' in current_backend.lower() or 'nbagg' in current_backend.lower():
+            pass  # Jupyter/Colab — do NOT override
+        else:
+            # Script context with unknown backend — safe to set Agg
+            matplotlib.use('Agg')
+    except Exception:
+        matplotlib.use('Agg')
     import matplotlib.pyplot as plt
     from matplotlib.backends.backend_pdf import PdfPages
 
