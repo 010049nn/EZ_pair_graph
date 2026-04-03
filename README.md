@@ -25,7 +25,7 @@ Output example of test_dataset_n1000.txt
 ### Option 1: pip install (recommended)
 
 ```bash
-pip install ez-pair-graph
+pip install git+https://github.com/010049nn/EZ_pair_graph.git -q
 ```
 
 Or install from source:
