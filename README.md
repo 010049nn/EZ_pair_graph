@@ -105,7 +105,7 @@ ez-pair-graph your_data.txt --log2
 
 | Option | Description |
 |--------|-------------|
-| `--format FORMAT` | Output format: `pdf` (default), `svg`, `png`, `html`, `json` |
+| `--format FORMAT` | Output format: `pdf` (default), `svg`, `png` |
 | `--output-dir DIR` | Output directory (default: output_EZ) |
 | `--output-prefix PREFIX` | Prefix for output filenames |
 | `--plots TYPES` | Plot types: `slopegraph`, `trapezoid`, `clustered_line`, `parallel_arrow` |
