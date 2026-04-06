@@ -23,7 +23,7 @@ def main():
     parser.add_argument('input_file', help='Input data file (space/tab/comma-separated)')
 
     parser.add_argument('--format', '-f',
-                        choices=['pdf', 'svg', 'png', 'html', 'json'],
+                        choices=['pdf', 'svg', 'png'],
                         default='pdf',
                         help='Output format (default: pdf)')
     parser.add_argument('--output-dir', default='output_EZ',
