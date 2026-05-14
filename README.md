@@ -277,7 +277,7 @@ This project provides two parallel entry points that share the same algorithms a
 | **pip CLI / Python API** | `src/ez_pair_graph/` package (`cli.py`, `plotting.py`, `preparation.py`) | Install via `pip install` and use as a library or command-line tool. |
 | **Shell script pipeline** | Root-level scripts (`preparation_1.py`, `preparation_2.py`, `slopegraph.py`, `clustered_line_plot.py`, `parallel_arrow_plot.py`, `trapezoid_plot.py`) called by `pipeline_for_EZ_plot.sh` | Used by the Docker workflow and for running the pipeline without pip installation. |
 
-The root-level `.py` scripts are the standalone originals invoked directly by the shell script. The `src/ez_pair_graph/` package wraps the same logic into an installable Python library. Both are maintained and required — do not remove the root-level scripts if you use the Docker or shell script workflow.
+The root-level `.py` scripts are the standalone originals invoked directly by the shell script.
 
 ## Dependencies
 
