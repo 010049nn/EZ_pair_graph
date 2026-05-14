@@ -239,7 +239,7 @@ Supported formats: space-separated, tab-separated, or comma-separated (CSV).
 
 ## Clustering Methods
 
-EZ-Pair Graph provides two deterministic clustering algorithms, both of which produce identical results for the same input data and parameters:
+EZ-Pair Graph provides two clustering algorithms, both of which produce identical results for the same input data and parameters:
 
 ### Hierarchical clustering (default)
 
