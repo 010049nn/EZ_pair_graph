@@ -251,7 +251,6 @@ EZ-Pair Graph provides two deterministic clustering algorithms, both of which pr
 
 - Density-based clustering that does not require specifying the number of clusters
 - Better for datasets with varying cluster densities
-- Native implementation — no additional external dependencies required
 - Controlled by `--min-cluster-size` / `--min_cluster_size` (default: 5) and `--min-samples` / `--min_samples`
 
 Observations are first separated by direction of change (ascending: B−A ≥ 0; descending: B−A < 0), and clustering is performed independently within each group. Clusters whose median points fall outside the 1.5×IQR whisker range of the boxplots are treated as outliers and excluded from the visualization.
