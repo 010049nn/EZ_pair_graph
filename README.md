@@ -291,7 +291,7 @@ The root-level `.py` scripts are the standalone originals invoked directly by th
 
 If you use EZ-Pair Graph in your research, please cite:
 
-> Ezoe, A., Seki, M. and Mochida, K. EZ-Pair Graph: A scalable unified-axis visualization for summarizing large-scale paired data. *Bioinformatics Advances* (2026).
+> Ezoe, A., Seki, M. and Mochida, K. EZ-Pair Graph: A scalable unified-axis visualization method for summarizing large-scale paired data. *Bioinformatics Advances* (2026). (submitted)
 
 ## License
 
